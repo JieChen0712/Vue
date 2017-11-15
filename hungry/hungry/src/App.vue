@@ -12,7 +12,7 @@
 				<router-link @click.native="getSeller()" to="/seller">商家</router-link>
 			</div>
 		</div>
-		<keep-alive><router-view :seller="seller" v-if="$route.meta.keepAlive"></router-view></keep-alive>
+		<keep-alive><router-view :seller="seller"></router-view></keep-alive>
 	</div>
 </template>
 

@@ -63,7 +63,8 @@
 	        type: Array
 	      },
 	      supportsMap: [],
-	      selectFood: {}
+	      selectFood: {},
+	      is_scroll:false
 	    }
 	  },
 	  created () {
@@ -79,28 +80,33 @@
   	    })
 	  },
 	  methods: {
-//	    scroll_to (num) {
-//	      let menu_item = document.getElementsByClassName('menu-item')
-//	      let food_list = document.getElementsByClassName('foods-list')
-//	      let food_wrapper = document.getElementsByClassName('foods-wrapper')
-//      let scrollHeight = 0
-//      let count = 0;
-//      for(let i = 0; i < num; i++) {
-//        scrollHeight += food_list[i].offsetHeight
-//      }
-//      let timer = setInterval(function() {
-//        let speed = Math.round((Math.abs((Math.abs(food_wrapper[0].scrollTop) - Math.abs(scrollHeight)) * 1) / 5.00))
-//        if(food_wrapper[0].scrollTop > scrollHeight) {
-//          food_wrapper[0].scrollTop = food_wrapper[0].scrollTop - speed
-//        } else {
-//          food_wrapper[0].scrollTop = food_wrapper[0].scrollTop + speed
-//        }
-//        if(speed == 0) {
-//          clearInterval(timer)
-//        }
-//      }, 50);//	      food_wrapper[0].scrollTop = scrollHeight
-//	      menu_item[num].classList.add('active')
-//	    },
+	    scroll_to (num) {
+	      if(this.is_scroll){
+	        return
+	      }
+	      this.is_scroll = !this.is_scroll
+	      let menu_item = document.getElementsByClassName('menu-item')
+	      let food_list = document.getElementsByClassName('foods-list')
+	      let food_wrapper = document.getElementsByClassName('foods-wrapper')
+        let scrollHeight = 0
+        let count = 0;
+        for(let i = 0; i < num; i++) {
+          scrollHeight += food_list[i].offsetHeight
+        }
+        let timer = setInterval(() => {
+          let speed = Math.round((Math.abs((Math.abs(food_wrapper[0].scrollTop) - Math.abs(scrollHeight)) * 1) / 5.00))
+          if(food_wrapper[0].scrollTop > scrollHeight) {
+            food_wrapper[0].scrollTop = food_wrapper[0].scrollTop - speed
+          } else {
+            food_wrapper[0].scrollTop = food_wrapper[0].scrollTop + speed
+          }
+          if(speed == 0) {
+            clearInterval(timer)
+            this.is_scroll = !this.is_scroll
+          }
+        }, 50);//	      food_wrapper[0].scrollTop = scrollHeight
+	      menu_item[num].classList.add('active')
+	    },
 	    menu_AddActive () {
 	      let food_wrapper = document.getElementsByClassName('foods-wrapper')[0]
 	      let food_list = document.getElementsByClassName('foods-list')
